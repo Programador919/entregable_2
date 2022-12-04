@@ -1,9 +1,17 @@
+import { async } from "@firebase/util";
 import React, { useState } from "react";
+import { crearProducto } from "./productosService";
+import Swal from 'sweetalert2';
 
 export const News = () => {
 
   const [valoresFormulario, setValoresFormulario] = useState({});
-  const { nombre = "", descripcion = "", direccion = "", imagen = "" } = valoresFormulario;
+  const {
+    nombre = "",
+    descripcion = "",
+    direccion = "",
+    imagen = "",
+  } = valoresFormulario;
 
   // permite asignar los valores del formulario a la variable de estado  formValues
   const handleOnChange = (e) => {
@@ -14,10 +22,26 @@ export const News = () => {
   };
 
   // pinta los valores del formulario cuando presionan el boton
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault(); // evita que se recargue el formulario
     console.log(valoresFormulario);
-  }
+    try {
+      Swal.fire({ allowOutsideClick: false, text: "Cargando..." });
+      Swal.showLoading();
+      await crearProducto(valoresFormulario);
+      Swal.close();
+      console.log("Creado desde la pagina News");
+      // limpiamos formulario
+      setValoresFormulario({
+        nombre: "",
+        descripcion: "",
+        direccion: "",
+        imagen: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="container-fluid mt-3">
@@ -79,6 +103,5 @@ export const News = () => {
         </button>
       </form>
     </div>
-  );
-};
-
+  )
+}

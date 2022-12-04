@@ -1,10 +1,43 @@
 import React, { useState } from "react";
+import { listaProductos } from "./data-productos";
+import { listarProductos } from "./productosService";
+import Swal from "sweetalert2";
 
 const Search = () => {
   const [valoresFormulario, setValoresFormulario] = useState({});
   const { nombre = "" } = valoresFormulario;
+  const [resultado, setResultado] = useState([]);
 
-  const restaurantes = [
+  // se le asigna los valores del formulario a la variable de estado formValues
+
+  const handleOnChange = (e) => {
+    // console.log(e);
+    console.log(e.target.name, e.target.value);
+
+    if (e.target.name === "nombre") {
+      setValoresFormulario({ ...valoresFormulario, nombre: e.target.value });
+    }
+    console.log(valoresFormulario);
+  };
+
+  // para pintar los valores de formulario cuando da click al boton
+  const handleOnSubmit = (e) => {
+    e.preventDefault(); // evita que se recargue el formulario
+    console.log("estoy haciendo click");
+    const filtro = listaProductos.filter((hshshs) =>
+      hshshs.nombre.toUpperCase().includes(nombre.toUpperCase())
+    );
+    console.log(resultado);
+    setResultado(filtro);
+  };
+
+  //listaProductos.filter((hshshs) =>
+  //hshshs.nombre.toUpperCase().includes(nombre.toUpperCase())
+  //);
+  //console.log(resultado);
+  //setResultado(filtro);
+
+  /*const restaurantes = [
     {
       id: 1,
       nombre: "PACIFICO MAR",
@@ -57,18 +90,18 @@ const Search = () => {
 
   console.log("Estoy en search");
 
-  /*const nuevosCursos = [];
+  const nuevosCursos = [];
     for (const curso of cursos) {
         if (curso.creditos >= 3) {
             nuevosCursos.push(curso);
         }
-    }*/
+    }
   //const nuevosCursos = cursos.filter(curso => curso.creditos >= 3);
   const nuevosRestaurantes = restaurantes.filter((restaurantes) =>
     restaurantes.nombre.toUpperCase().includes("ING")
   );
 
-  //console.log(cursos, nuevosCursos);
+  //console.log(cursos, nuevosCursos);*/
 
   return (
     <div className="container-fluid mt-3">
@@ -90,12 +123,33 @@ const Search = () => {
           Search
         </button>
       </form>
-      <div>
 
+      <div className="row mt-3">
+        <div className="col">
+          <div className="row row-cols-1 row-cols-md-4 g-4">
+            {resultado.map((asasas) => {
+              return (
+                <div className="col" key={asasas.id}>
+                  <div className="card">
+                    <img
+                      src={asasas.imagen}
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{asasas.nombre}</h5>
+                      <p className="card-text">{asasas.direccion}</p>
+                      <p className="card-text">{asasas.descripcion}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export { Search };
-
