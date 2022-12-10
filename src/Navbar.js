@@ -1,21 +1,22 @@
 import React from "react";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/restaurant">
-          Directory
+          App-Restaurats
         </Link>
         <button
-        className="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,7 +24,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'active' : '' }`
+                  `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/restaurant"
               >
@@ -34,7 +35,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'active' : '' }`
+                  `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/search"
               >
@@ -45,13 +46,16 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'active' : '' }`
-                } to="/news">New
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+                to="/news"
+              >
+                New
               </NavLink>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
