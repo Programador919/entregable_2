@@ -1,7 +1,9 @@
 body {
     front-family: arial;
+    font-size: 0.9rem;
 }
 
 .card-title-custom {
     color: green;
 }
+

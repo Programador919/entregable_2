@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { listaProductos, listarProductos } from "./productosService";
+import { listarProductos } from "./productosService";
 
 export const Restaurant = () => {
   const [productos, setProductos] = useState([]);
